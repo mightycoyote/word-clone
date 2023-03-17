@@ -4,10 +4,11 @@ function GuessForm() {
   const [guess, setGuess] = React.useState('');
 
   return (
-    <form class="guess-input-wrapper"
+    <form className="guess-input-wrapper"
       onSubmit={(event) => {
         event.preventDefault();
-        console.log(guess);
+        // Josh likes to make these console logs into objects; nicer to read in console
+        console.log({guess});
         setGuess('');
       }}
     >
@@ -16,10 +17,11 @@ function GuessForm() {
       <input 
         id="guess-input" 
         type="text"
-        pattern="\w{5}"
+        pattern="[a-zA-Z]{5}"
         required
         value={guess} 
-        onChange={(event)=> {setGuess((event.target.value).toUpperCase())}} />
+        onChange={(event)=> {setGuess((event.target.value).toUpperCase())}} 
+      />
     </form>
   );
 }
