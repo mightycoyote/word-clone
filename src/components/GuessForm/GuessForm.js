@@ -1,14 +1,14 @@
 import React from "react";
 
-function GuessForm() {
+function GuessForm( {addGuess} ) {
+  // this state is just to watch this form. addGuess adds it to Game state when submitted
   const [guess, setGuess] = React.useState('');
 
   return (
     <form className="guess-input-wrapper"
       onSubmit={(event) => {
         event.preventDefault();
-        // Josh likes to make these console logs into objects; nicer to read in console
-        console.log({guess});
+        addGuess(guess);
         setGuess('');
       }}
     >
