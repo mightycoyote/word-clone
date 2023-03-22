@@ -1,26 +1,29 @@
 import React from "react";
 
-function GuessForm( {addGuess} ) {
+function GuessForm({ addGuess, win }) {
   // this state is just to watch this form. addGuess adds it to Game state when submitted
-  const [guess, setGuess] = React.useState('');
+  const [guess, setGuess] = React.useState("");
 
   return (
-    <form className="guess-input-wrapper"
+    <form
+      className="guess-input-wrapper"
       onSubmit={(event) => {
         event.preventDefault();
         addGuess(guess);
-        setGuess('');
+        setGuess("");
       }}
     >
-  
       <label htmlFor="guess-input">Enter guess:</label>
-      <input 
-        id="guess-input" 
+      <input
+        id="guess-input"
         type="text"
         pattern="[a-zA-Z]{5}"
+        value={guess}
         required
-        value={guess} 
-        onChange={(event)=> {setGuess((event.target.value).toUpperCase())}} 
+        disabled={win !== undefined ? true : false}
+        onChange={(event) => {
+          setGuess(event.target.value.toUpperCase());
+        }}
       />
     </form>
   );
