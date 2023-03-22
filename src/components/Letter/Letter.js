@@ -1,10 +1,10 @@
 import React from "react";
 
 function Letter({ letter, letterStatus }) {
-  const [classes, setClasses] = React.useState('cell');
-
+ const className = letterStatus ? `cell ${letterStatus}` : 'cell';
+  
   return (
-    <span className={classes}>{letter}</span>
+    <span className={className}>{letter}</span>
   );
 }
 
