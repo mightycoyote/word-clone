@@ -7,12 +7,15 @@ import GuessForm from "../GuessForm/GuessForm";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 // Pick a random word on every pageload.
-const answer = sample(WORDS);
+// const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
+// console.info({ answer });
 
 function Game() {
-  // displayed list of submitted guesses
+  const [answer, setAnswer] = React.useState(() => {
+    return sample(WORDS);
+  });
+  console.info({ answer });
   const [guessLog, setGuessLog] = React.useState([]);
   const [win, setWin] = React.useState(undefined);
   const [numberOfGuesses, setNumberOfGuesses] = React.useState(0);
@@ -38,6 +41,13 @@ function Game() {
     }
   }
 
+  function reset() {
+    setGuessLog("");
+    setWin(undefined);
+    setNumberOfGuesses(0);
+    setAnswer(sample(WORDS));
+  }
+
   return (
     <>
       <GuessResults guessLog={guessLog} answer={answer} />
@@ -47,6 +57,7 @@ function Game() {
           <p>
             <strong>Congratulations!</strong> Got it in{" "}
             <strong>{numberOfGuesses} guesses</strong>.
+            <button onClick={() => reset()}>Reset</button>
           </p>
         </div>
       )}
@@ -54,6 +65,7 @@ function Game() {
         <div className="sad banner">
           <p>
             Sorry, the correct answer is <strong>{answer}</strong>.
+            <button onClick={() => reset()}>Reset</button>
           </p>
         </div>
       )}
