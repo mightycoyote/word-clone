@@ -52,12 +52,15 @@ function Game() {
     <>
       <GuessResults guessLog={guessLog} answer={answer} />
       <GuessForm addGuess={addGuess} win={win} />
+      {/* Josh creates a basic banner component, then a win banner and a lose banner */}
       {win === true && (
         <div className="happy banner">
           <p>
             <strong>Congratulations!</strong> Got it in{" "}
-            <strong>{numberOfGuesses} guesses</strong>.
-            <button onClick={() => reset()}>Reset</button>
+            <strong>
+              {numberOfGuesses === 1 ? "1 guess" : `${numberOfGuesses} guesses`}
+            </strong>
+            .<button onClick={() => reset()}>Reset</button>
           </p>
         </div>
       )}
